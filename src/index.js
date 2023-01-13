@@ -12,6 +12,7 @@ input.addEventListener('input',
   debounce(e => {
     const trimmedValue = input.value.trim();
     cleanHtml();
+    
     if (trimmedValue !== '') {
       fetchCountries(trimmedValue)
       .then(foundData => {
@@ -27,21 +28,23 @@ input.addEventListener('input',
       }).catch(error => {
         console.error(error);
       })
-      // .finally(()=>{
+      // .finally(() => {
+      //   setTimeout(() => {
       //   input.value = '';
-         
+      // }, 3000)
       // });
-      input.value = '';
-    }
+    } 
   }, DEBOUNCE_DELAY)
+  
 );
 
 function renderCountryList(countries) {
   const markup = countries
     .map(country => {
       return `<li>
-                    <img src="${country.flags.svg}" alt="Flag of ${country.name.official}" width="30" hight="20">
-                    <b>${country.name.official}<b></p>
+                    <img src="${country.flags.svg}" alt="Flag of ${country.name.official}" 
+                    width="30" hight="20">    
+                    <b>${country.name.official}<b>
               </li>`;
     })
     .join('');
